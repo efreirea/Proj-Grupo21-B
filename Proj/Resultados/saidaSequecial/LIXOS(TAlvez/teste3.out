@@ -1,0 +1,13 @@
+BlockID: 1 ThreadID: 0 C: 0 offsetBloco: 256 qntLinBloco:  256 offsetThread 0 qntLinThread 86 linstart: 256
+BlockID: 1 ThreadID: 1 C: 0 offsetBloco: 256 qntLinBloco:  256 offsetThread 86 qntLinThread 85 linstart: 342
+BlockID: 1 ThreadID: 2 C: 0 offsetBloco: 256 qntLinBloco:  256 offsetThread 171 qntLinThread 85 linstart: 427
+BlockID: 3 ThreadID: 0 C: 2 offsetBloco: 1536 qntLinBloco:  512 offsetThread 0 qntLinThread 171 linstart: 1536
+BlockID: 3 ThreadID: 1 C: 2 offsetBloco: 1536 qntLinBloco:  512 offsetThread 171 qntLinThread 171 linstart: 1707
+BlockID: 3 ThreadID: 2 C: 2 offsetBloco: 1536 qntLinBloco:  512 offsetThread 342 qntLinThread 170 linstart: 1878
+BlockID: 0 ThreadID: 0 C: 0 offsetBloco: 0 qntLinBloco:  256 offsetThread 0 qntLinThread 86 linstart: 0
+BlockID: 0 ThreadID: 1 C: 0 offsetBloco: 0 qntLinBloco:  256 offsetThread 86 qntLinThread 85 linstart: 86
+BlockID: 0 ThreadID: 2 C: 0 offsetBloco: 0 qntLinBloco:  256 offsetThread 171 qntLinThread 85 linstart: 171
+BlockID: 2 ThreadID: 0 C: 1 offsetBloco: 1024 qntLinBloco:  512 offsetThread 0 qntLinThread 171 linstart: 1024
+BlockID: 2 ThreadID: 1 C: 1 offsetBloco: 1024 qntLinBloco:  512 offsetThread 171 qntLinThread 171 linstart: 1195
+BlockID: 2 ThreadID: 2 C: 1 offsetBloco: 1024 qntLinBloco:  512 offsetThread 342 qntLinThread 170 linstart: 1366
+../imagens/Lenna.png	4	3	0.958919

@@ -1,0 +1,23 @@
+20 10
+1 2
+3 4
+./resultadosCUDACorECinza/4_4_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/4_8_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/4_32_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/4_512_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/4_1024_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/8_4_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/8_8_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/8_32_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/8_512_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/8_1024_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/512_4_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/512_8_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/512_32_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/512_512_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/512_1024_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/1024_4_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/1024_8_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/1024_32_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/1024_512_saidaMedia_Cor_Cuda.out
+./resultadosCUDACorECinza/1024_1024_saidaMedia_Cor_Cuda.out

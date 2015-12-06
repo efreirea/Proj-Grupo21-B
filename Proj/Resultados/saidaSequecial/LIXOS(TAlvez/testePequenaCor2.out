@@ -1,0 +1,15 @@
+0 2 3 NBLOCOS: 4 NTHREADS: 3
+0 2 3 4 
+BlockID: 1 ThreadID: 0 C: 0 offsetBloco: 1000 qntLinBloco:  1000 offsetThread 0 qntLinThread 334 linstart: 1000
+BlockID: 1 ThreadID: 1 C: 0 offsetBloco: 1000 qntLinBloco:  1000 offsetThread 334 qntLinThread 333 linstart: 1334
+BlockID: 1 ThreadID: 2 C: 0 offsetBloco: 1000 qntLinBloco:  1000 offsetThread 667 qntLinThread 333 linstart: 1667
+BlockID: 0 ThreadID: 0 C: 2 offsetBloco: 0 qntLinBloco:  2000 offsetThread 0 qntLinThread 667 linstart: 0
+BlockID: 0 ThreadID: 1 C: 2 offsetBloco: 0 qntLinBloco:  2000 offsetThread 667 qntLinThread 667 linstart: 667
+BlockID: 0 ThreadID: 2 C: 2 offsetBloco: 0 qntLinBloco:  2000 offsetThread 1334 qntLinThread 666 linstart: 1334
+BlockID: 0 ThreadID: 0 C: 0 offsetBloco: 0 qntLinBloco:  1000 offsetThread 0 qntLinThread 334 linstart: 0
+BlockID: 0 ThreadID: 1 C: 0 offsetBloco: 0 qntLinBloco:  1000 offsetThread 334 qntLinThread 333 linstart: 334
+BlockID: 0 ThreadID: 2 C: 0 offsetBloco: 0 qntLinBloco:  1000 offsetThread 667 qntLinThread 333 linstart: 667
+BlockID: 0 ThreadID: 0 C: 1 offsetBloco: 0 qntLinBloco:  2000 offsetThread 0 qntLinThread 667 linstart: 0
+BlockID: 0 ThreadID: 1 C: 1 offsetBloco: 0 qntLinBloco:  2000 offsetThread 667 qntLinThread 667 linstart: 667
+BlockID: 0 ThreadID: 2 C: 1 offsetBloco: 0 qntLinBloco:  2000 offsetThread 1334 qntLinThread 666 linstart: 1334
+../imagens/Roll4025.jpg	4	3	13.8192

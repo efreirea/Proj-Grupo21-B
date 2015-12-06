@@ -1,0 +1,7 @@
+cmake_minimum_required(VERSION 2.8)
+project( sequential )
+find_package( OpenCV REQUIRED )
+add_executable( sequential sequential.cpp )
+target_link_libraries( sequential ${OpenCV_LIBS} )
+SET(GCC_COVERAGE_COMPILE_FLAGS "-g")
+add_definitions(${GCC_COVERAGE_COMPILE_FLAGS})
