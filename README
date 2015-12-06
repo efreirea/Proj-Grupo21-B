@@ -1,27 +1,34 @@
 # Proj-Grupo21-B
 
 DESCRIÇÃO:
-	Para a solução deste trabalho, foram feitos seis executáveis:
-		parallel_CUDA
-		sequetial
-		testAndAnalyse
+	Para a solução deste trabalho, foram feitos quatro executáveis:
+		Proj/parallel/parallel_CUDA
+		TestAndAnalyze_SEQ
+		TestAndAnalyze_PAR
+		TestAndAnalyze_CUDA
+	Além deles, estão presentes, também, os desenvolvido no trabalho 2, sendo eles:
+		T2/sequential/sequential
+		T2/parallel/parallel_MPI
 
 ORGANIZAÇÃO DOS ARQUIVOS:
-	Pasta temposColetados:
-		Pasta contendo os arquivos de saída dos tempos coletados ao executar "parallel" e sequential. Estes dados foram os utilizados para calculo das medias
-	Pasta mediasCalculadas:
-		Pasta contendo os arquivos de saida do programa "testAndAnalyse" a partir dos arquvos contidos na pasta temposColetados
-	Pasta experimento2
-		Pasta contendo entradas para o programa testAndAnalyse de modo a realizar experimento com 4, 6 e 8 blocos.
-	Pasta experimento3
-		Pasta contendo entradas para o programa testAndAnalyse de modo a realizar experimento com 14 blocos.
-	Arquivos hostsComSlotsX
+	Pasta T2:
+		Pasta contendo implementação sequencial e paralela usando MPI.
+	Pasta Proj:
+		Pasta contendo implementação em Cuda
+	Pastas Proj/Resultados/{saidaMPI,saidaSequencial,resultadosCUDA} :
+		Pastas contendo a coleta de tempo de cada uma das 10 execucoes de cada caso de teste, sem calculos de estatisticas
+	Pasta Proj/Resultados/mediasTempos:
+		Pasta contendo todos os calculos de media e desvio padrão de tempo
+	Pasta Experimentos:
+		Pasta contendo entradas para o programa TestAndAnalyze_* de modo a realizar experimentos. Dentro dela existem subpastas dividindo as entradas para CUDA e MPI
+	Arquivos T2/hostsComSlotsX
 		Arquivos a serem usados de entrada para a execucao do OpenMPI. Cada arquivo indica uma quantidade diferente de hosts a serem utilizados, a saber: 4,6,8,14
 	Arquivo Makefile
 		Arquivo contendo as reguintes regras:
-			compSeq -> linha de comando para compilar a versão sequencial do programa e gerar o executável "serial"
-			compPar -> linha de comando para compilar a versão paralela do programa e gerar o executável "parallel"
-			compTest -> linha de comando para compilar o programa "testAndAnalyse"
+			compSeq -> linha de comando para compilar a versão sequencial do programa e gerar o executável "sequential"
+			compParalMPI -> linha de comando para compilar a versão paralela em MPI do programa e gerar o executável "parallel_MPI"
+			compParalCuda -> linha de comando para compilar a versão paralela em Cuda do programa e gerar o executável "parallel_CUDA"
+			compTest -> linha de comando para compilar os programas "TestAndAnalyze_*"
 			
 
 
@@ -32,7 +39,7 @@ Solução sequencial:
 	DESCRIÇÃO
 		Programa responsável por efetivamente realizar o processo de smoothing utilizando uma abordagem sequencial e calcular o tempo de execução
 	SINTAXE
-		serial <arquivo_imagem> <tipo_imagem>
+		sequential <arquivo_imagem> <tipo_imagem>
 			onde 
 				<arquivo_imagem> -> nome do arquivo da imagem a ser processada
 				<tipo_imagem> -> tipo a imagem a ser processada. Pode assumir dois valores: 1 - RGB, 2 - GrayScale			
@@ -42,29 +49,48 @@ Solução sequencial:
 			<arquivo_imagem> <NUM_BLOCOS> <NUM_THREADS> <TEMPO>
 
 			onde
-				<NUM_BLOCOS> -> número de blocos em que a imagem foi dividida
-				<NUM_THREADS> -> número de threads utilizadas pelo OpenMP para processar a imagem em cada nó
+				<NUM_BLOCOS> -> número de blocos em que a imagem foi dividida. Nesse caso, imprime -1
+				<NUM_THREADS> -> número de threads utilizadas pelo OpenMP para processar a imagem em cada nó. Nesse caso, imprime -1
 				<TEMPO> tempo de execução
 
-Solução paralela:
+Solução paralela em MPI e MP:
 	DESCRIÇÃO:
-		Programa responsável por efetivamente realizar o processo de smoothing utilizando uma abordagem paralela. Fas uso de OpenMPI e OpenMP para a implementação do paralelismo.
+		Programa responsável por efetivamente realizar o processo de smoothing utilizando uma abordagem paralela. Faz uso de OpenMPI e OpenMP para a implementação do paralelismo.
 	SINTAXE:
-		parallel <arquivo_imagem> <tipo_magem> <NUM_THREADS>
+		parallel_MPI <arquivo_imagem> <tipo_magem> <NUM_THREADS>
 			onde
 				<arquivo_imagem> -> nome do arquivo da imagem a ser processada
 				<tipo_imagem> -> tipo a imagem a ser processada. Pode assumir dois valores: 1 - RGB, 2 - GrayScale	
-				<NUM_THREADS> -> número de threads utilizadas pelo OpenMP para processar a imagem em cada nó
+				<NUM_THREADS> -> número de threads utilizadas pelo OpenMP para processar a imagem em cada bloco
 	FORMATO DE SAÍDA GERADO:		
 		Vide Solução Sequencial.
 
-Programa testAndAnalyse:
+
+
+Solução paralela em Cuda:
 	DESCRIÇÃO:
-		Programa responsável por executar "parallel" e "serial" tantas vezes quanto necessárias e realizar o cálculo da média de tempo e seu desvio padrão. Permite o uso da flag -nE para indicar se somente o cálculo das estatísticas devem ser feitos, sem executar "parallel" e "serial". 
+		Programa responsável por efetivamente realizar o processo de smoothing utilizando uma abordagem paralela. Faz uso de Cuda para a implementação do paralelismo.
 	SINTAXE:
-		analyzer [-nE]
+		parallel_CUDA <arquivo_imagem> <tipo_magem> <NUM_THREADS>
+			onde
+				<arquivo_imagem> -> nome do arquivo da imagem a ser processada
+				<tipo_imagem> -> tipo a imagem a ser processada. Pode assumir dois valores: 1 - RGB, 2 - GrayScale	
+				<NUM_THREADS> -> número de threads utilizadas para processar a imagem em cada bloco
+				<NUM_BLOCOS> -> número de blocos utilizados para processar a imagem
+	FORMATO DE SAÍDA GERADO:		
+		Vide Solução Sequencial.
+
+
+
+
+Programa TestAndAnalyze_*:
+	DESCRIÇÃO:
+		Programa responsável por executar "parallel_*" e "sequential" tantas vezes quanto necessárias e realizar o cálculo da média de tempo e seu desvio padrão. Permite o uso da flag -nE para indicar se somente o cálculo das estatísticas devem ser feitos, sem executar "parallel_*" e "sequential".
+		Nessa versão, foram feitos três programas diferentes. TestAndAnalyze_CUDA realiza somente a execução em CUDA e TestAndAnalyze_MPI somente em MPI. Por facilidade, ambos não executam calculos estatísticos. Para realização dos cálculos usar TestAndAnalyze_SEQ, que realiza execução sequencial, bem como os cálculos de média e desvio padrão 
+	SINTAXE:
+		TestAndAnalyze_* [-nE]
 			onde 
-			[-nE] -> Parâmetro opcional. Se presente, este parâmetro indica que não se deve executar os programas "parallel" e "serial". Apenas serão lidos os arquivos de tempo e calculados a média e desvio padrão.
+			[-nE] -> Parâmetro opcional. Se presente, este parâmetro indica que não se deve executar os programas "parallel" e "sequential". Apenas serão lidos os arquivos de tempo e calculados a média e desvio padrão.
 	FORMATO DE ENTRADA ESPERADO:
 		O programa lê da entrada padrão, porém o formato de entrada difere dependendo da presença do parâmetro -nE.
 		Sem parâmetro -nE:
@@ -94,9 +120,9 @@ Programa testAndAnalyse:
 				<THREADS[0]> ... <THREADS[N_THREADS-1]> -> lista de <N_THREADS> valores que representam a quantidade de threads utilizadas no algoritmo paralelo.
 				<N_BLOCOS> -> quantidade de valores diferentes de quantidades de blocos que devem ser testadas.
 				<BLOCOS[0]> ... <BLOCOS[N_BLOCOS-1]> -> lista de <N_BLOCOS> valores que representam a quantidade de blocos utilizadas no algoritmo paralelo.
-				<arquivo_imagem>[i] -> arquivos que contêm a imagem para os executávies "parallel" e "serial".
+				<arquivo_imagem>[i] -> arquivos que contêm a imagem para os executávies "parallel_*" e "sequential".
 				<tipo_imagem[i] -> flags indicando o tipo de imagem: 1 - RGB, 2 - GrayScale
-				<arquivo_saida_tempos>[i] -> arquivos onde devem ser armazenados os tempos calculados nos executáveis "parallel" e "serial". Para detalhes na formatação do conteúdo, consultar seção "FORMATO DE SAIDA GERADO" das soluções paralelas e sequencial.
+				<arquivo_saida_tempos>[i] -> arquivos onde devem ser armazenados os tempos calculados nos executáveis "parallel" e "sequential". Para detalhes na formatação do conteúdo, consultar seção "FORMATO DE SAIDA GERADO" das soluções paralelas e sequencial.
 		Com parâmetro -nE:
 			<NUM_ARQUIVOS> <LIXO>
 			<N_THREADS> <LIXO[0]> <LIXO[1]> .... <LIXO[N_THREADS-1]>
@@ -111,7 +137,7 @@ Programa testAndAnalyse:
 				<LIXO> -> parâmetros necessários, porém não utilizados. Devem ser números inteiros.
 				<N_THREADS> -> parâmetro necessário, mas não utilizado. Deve ser um número inteiro
 				<N_BLOCOS> -> parâmetro necessário, mas não utilizado. Deve ser um número inteiro
-				<arquivo_saida_tempos>[i] -> arquivos onde já estão armazenados os tempos de execução obtidos por "parallel" e "serial". Tais arquivos serão utilizados como entrada para este programa. Para detalhes na formatação do conteúdo, consultar seção "FORMATO DE SAIDA GERADO" das soluções paralelas e sequencial. 
+				<arquivo_saida_tempos>[i] -> arquivos onde já estão armazenados os tempos de execução obtidos por "parallel_*" e "sequential". Tais arquivos serão utilizados como entrada para este programa. Para detalhes na formatação do conteúdo, consultar seção "FORMATO DE SAIDA GERADO" das soluções paralelas e sequencial. 
 
 	FORMATO DE SAÍDA GERADO:
 		Na saída padrão:
@@ -123,8 +149,8 @@ Programa testAndAnalyse:
 				<MEDIA> -> Média dos valores de tempo presentes no arquivo <arquivos_saida_tempos>
 				<DESVIO_PADRAO> -> desvio padrão dos valores de tempo presentes no arquivo <arquivos_saida_tempos>
 		No entanto, quando o parâmetro -nE não é passado, dois pontos devem ser observados quanto a saída:
-			1) Os programas "parallel" e "serial" são executados mais tantas vezes quanto pedido. Portanto, consulte a documentação de cada um (acima) para a descrição das saídas geradas por cada um deles.
-			2) Quando valores de threads e blocos são informados, "testAndAnalyse" chama "parallel" e "serial" de modo que, dado uma imagem de entrada, um valor de thread e um valor de bloco, um arquivo diferente de saída é informado. Portanto, arquivos extras são criados seguindo o seguinte padrão para seus nomes:
+			1) Os programas "parallel_*" e "sequential" são executados mais tantas vezes quanto pedido. Portanto, consulte a documentação de cada um (acima) para a descrição das saídas geradas por cada um deles.
+			2) Quando valores de threads e blocos são informados, "TestAndAnalyze" chama "parallel_*" e "sequential" de modo que, dado uma imagem de entrada, um valor de thread e um valor de bloco, um arquivo diferente de saída é informado. Portanto, arquivos extras são criados seguindo o seguinte padrão para seus nomes:
 				<BLOCO[i]>_<THREAD[i]>_<arquivo_saida_tempos>
  
 
